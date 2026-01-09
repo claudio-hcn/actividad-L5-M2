@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Wallet - Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .input-wrapper {
+      position: relative;
+      /* display: inline-block; */
+    }
+
+    .tooltip {
+      visibility: hidden;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 5px 10px;
+      border-radius: 4px;
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .input-wrapper:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="bg-dark">
+  <div class="container-fluid px-3 py-3">
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-4 mx-auto">
+        <div class="bg-secondary p-3 rounded">
+          <h2 class="text-warning mb-3">Inicio de sesión</h2>
+          <form>
+            <div class="form-group input-wrapper">
+              <label for="email" class="text-white">Email:</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email">
+              <span class="tooltip">user: admin@email.com</span>
+            
+            </div>
+            <div class="form-group input-wrapper">
+              <label for="password" class="text-white">Contraseña:</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter password">
+              <span class="tooltip">pass: admin123</span>
+            </div>
+            <p>ingrese email: admin@email.com pass: admin123</p>
+            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (email === 'admin@email.com' && password === 'admin123') {
+      alert('Inicio de sesión exitoso');
+      localStorage.setItem('loggedIn', 'true');
+      window.location.href = 'menu.html';
+    } else {
+      alert('Email o contraseña incorrectos');
+    }
+  });
+</script>
+
+</html>

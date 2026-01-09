@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wallet - Depositar</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<script>
+  if (!localStorage.getItem('loggedIn')) {
+    window.location.href = 'index.html';
+  }
+</script>
+
+<body class="bg-dark">
+  <div class="container bg-secondary p-3">
+    <h2 class="text-warning text-center">Depositar</h2>
+    <form>
+      <div class="form-group text-center ">
+        <label for="depositAmount">Monto a depositar:</label>
+        <input type="number" class="form-control" id="depositAmount" placeholder="Enter amount">
+      </div>
+      <button type="submit" class="btn btn-primary">Realizar depósito</button>
+    </form>
+    <a href="menu.html" class="btn btn-warning m-3">Volver al Menú Principal</a>
+    <button class="btn btn-danger btn-block" id="logout">
+  Cerrar sesión
+</button>
+
+  </div>
+</body>
+<script>
+  // Inicializar saldo si no existe
+if (!localStorage.getItem('saldo')) {
+  localStorage.setItem('saldo', 60000);
+}
+
+const inputDeposito = document.getElementById('depositAmount');
+document.querySelector('form').addEventListener('submit', function (e) {
+e.preventDefault();
+  let deposito = Number(inputDeposito.value);
+
+  if (deposito <= 0 || isNaN(deposito)) {
+    alert('Ingrese un monto válido');
+    return;
+  }
+
+  let saldoActual = Number(localStorage.getItem('saldo'));
+
+  let nuevoSaldo = saldoActual + deposito;
+
+  // Guardar nuevo saldo
+  localStorage.setItem('saldo', nuevoSaldo);
+
+  alert('Depósito realizado con éxito');
+
+registrarMovimiento('deposito', null, deposito);
+
+  inputDeposito.value = '';
+});
+
+function registrarMovimiento(tipo, contacto, monto) {
+      let movimientos = JSON.parse(localStorage.getItem('movimientos')) || [];
+
+      movimientos.unshift({
+        tipo,
+        contacto,
+        monto,
+        fecha: new Date().toLocaleString('es-CL')
+      });
+
+      localStorage.setItem('movimientos', JSON.stringify(movimientos));
+    }
+
+  document.getElementById('logout').addEventListener('click', () => {
+    localStorage.removeItem('loggedIn');
+    window.location.href = 'index.html';
+  });
+
+</script>
+</html>

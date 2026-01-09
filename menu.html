@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Wallet - Menú Principal</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<script>
+  if (!localStorage.getItem('loggedIn')) {
+    window.location.href = 'index.html';
+  }
+</script>
+
+<body class="bg-dark">
+
+  <div class="container min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100 justify-content-center">
+      <div class="col-12 col-md-8 col-xl-6">
+
+        <div class="bg-secondary p-3 rounded text-center">
+          <h2 class="text-warning mb-3">Menú Principal</h2>
+
+          <div class="form-group">
+            <label>Dinero en cuenta:</label>
+            <h3 id="monto" class="bg-light"></h3>
+          </div>
+
+          <label class="mb-2 d-block">Elija una de las siguientes acciones</label>
+
+          <div class="d-flex flex-wrap justify-content-center">
+            <a href="#" class="btn btn-primary m-1 col-11 col-md-5 col-lg-3" id="btn-depositar">
+              Depositar
+            </a>
+
+            <a href="#" class="btn btn-primary m-1 col-11 col-md-5 col-lg-3" id="btn-girar">
+              Enviar Dinero
+            </a>
+
+            <a href="#" class="btn btn-primary m-1 col-11 col-md-5 col-lg-4" id="btn-historial">
+              Últimos Movimientos
+            </a>
+          </div>
+          <button class="btn btn-danger btn-block mt-5" id="logout">
+  Cerrar sesión
+</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  function mostrarToast(mensaje, color, url) {
+    const toastHTML = `
+    <div class="toast" role="alert" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); z-index: 9999; min-width: 300px; transition: transform 0.3s ease;">
+      <div class="toast-body text-white text-center" style="background: ${color}; font-size: 18px; padding: 20px; border-radius: 10px;">
+        ${mensaje}
+      </div>
+    </div>
+  `;
+
+    document.body.insertAdjacentHTML('beforeend', toastHTML);
+    const toastElement = document.querySelector('.toast:last-child');
+
+    // Animación de entrada
+    setTimeout(() => {
+      toastElement.style.transform = 'translate(-50%, -50%) scale(1)';
+    }, 10);
+
+    // Redireccionar después de 2 segundos
+    setTimeout(() => {
+      window.location.href = url;
+    }, 2000);
+  }
+
+  // Botón depositar (verde)
+  document.getElementById('btn-depositar').addEventListener('click', function () {
+    mostrarToast('Direccionando a pantalla depositar', '#28a745', 'deposit.html');
+  });
+
+  // Botón girar (azul)
+  document.getElementById('btn-girar').addEventListener('click', function () {
+    mostrarToast('Direccionando a pantalla Enviar Dinero', '#696665', 'sendmoney.html');
+  });
+
+  // Botón historial (naranja/amarillo)
+  document.getElementById('btn-historial').addEventListener('click', function () {
+    mostrarToast('Direccionando a pantalla historial', '#ffc107', 'transactions.html');
+  });
+
+  if (!localStorage.getItem('saldo')) {
+    localStorage.setItem('saldo', 60000);
+  }
+
+  const montoElemento = document.getElementById('monto');
+
+  // Obtener saldo desde localStorage
+  let saldo = Number(localStorage.getItem('saldo'));
+
+  // Mostrarlo formateado
+  montoElemento.textContent =
+    '$' + saldo.toLocaleString('es-CL');
+
+document.getElementById('logout').addEventListener('click', () => {
+    localStorage.removeItem('loggedIn');
+    window.location.href = 'index.html';
+  });
+</script>
+
+</html>
