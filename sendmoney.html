@@ -27,12 +27,12 @@
   <div class="container bg-secondary p-3">
     <h2 class="text-warning text-center">Enviar Dinero</h2>
     <form>
-      <!-- <div class="form-group">
-        <label for="searchContact">Buscar en la agenda de transferencias:</label>
-        <input type="text" class="form-control" id="searchContact" placeholder="Search contact">
-      </div> -->
+      <div class="form-group bg-light p-1">
+        <label>Dinero en cuenta:</label>
+        <h3 id="monto" class="text-center"></h3>
+      </div>
 
-      <h5 class="text-warning">Lista Contactos</h5>
+      <h5 class="text-light text-center">Lista Contactos</h5>
       <button type="button" class="btn btn-primary btn-block my-2" data-toggle="modal" data-target="#modalContacto">
         Agregar nuevo contacto
       </button>
@@ -41,180 +41,195 @@
       </div>
     </form>
     <div class="form-group mt-3">
-      <label>Monto a enviar</label>
-      <input type="number" id="montoEnvio" class="form-control">
+      <label class="text-light">Seleccione un contacto e ingrese el monto a enviar</label>
+      <input type="number" id="montoEnvio" class="form-control" placeholder="ingrese el monto">
     </div>
 
-    <button class="btn btn-success btn-block" id="btnEnviar">
+    <button class="btn btn-primary btn-block" id="btnEnviar">
       Enviar dinero
     </button>
-    <a href="menu.html" class="btn btn-warning btn-block">Volver al Menú Principal</a>
-    <button class="btn btn-danger btn-block" id="logout">
-      Cerrar sesión
-    </button>
-  </div>
-  <div class="modal fade" id="modalContacto" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <h5 class="modal-title">Agregar contacto</h5>
-          <button type="button" class="close" data-dismiss="modal">
-            <span>&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <form id="formContacto">
-            <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" class="form-control" id="nombre" required>
-            </div>
-            <div class="form-group">
-              <label>Apellido</label>
-              <input type="text" class="form-control" id="apellido" required>
-            </div>
-            <div class="form-group">
-              <label>Numero de Cuenta</label>
-              <input type="number" class="form-control" id="nro_cuenta" required>
-            </div>
-            <div class="form-group">
-              <label>Alias</label>
-              <input type="text" class="form-control" id="alias" required>
-            </div>
-            <div class="form-group">
-              <label for="banco" class="form-label">Banco</label>
-              <select class="form-select" aria-label="Default select example" id="banco">
-                <option value="">Seleccione Banco</option>
-                <option value="1">Banco Estado</option>
-                <option value="2">Banco de Chile</option>
-                <option value="3">Banco Itau</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-success btn-block">
-              Guardar contacto
-            </button>
-          </form>
-        </div>
-
+    <div class="row mt-5">
+      <div class="col">
+        <a href="menu.html" class="btn btn-primary btn-block text-white">Volver al Menú Principal</a>
+      </div>
+      <div class="col">
+        <a class="btn btn-danger btn-block text-white" id="logout"> Cerrar sesión</a>
       </div>
     </div>
-  </div>
+    <div class="modal fade" id="modalContacto" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script>
-    document.getElementById('formContacto').addEventListener('submit', e => {
-      e.preventDefault();
+          <div class="modal-header">
+            <h5 class="modal-title">Agregar contacto</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
 
-      const nombre = document.getElementById('nombre').value;
-      const apellido = document.getElementById('apellido').value;
-      const nro_cuenta = document.getElementById('nro_cuenta').value;
-      const selectBanco = document.getElementById('banco');
-      const bancoTxt = selectBanco.options[selectBanco.selectedIndex].text;
-      if (selectBanco.value === "") {
-        alert("Debe seleccionar un banco");
-      } else {
-        contactos.push({
-          id: Date.now(),
-          nombre,
-          apellido,
-          nro_cuenta,
-          bancoTxt,
-        });
+          <div class="modal-body">
+            <form id="formContacto">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="nombre" required>
+              </div>
+              <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" id="apellido" required>
+              </div>
+              <div class="form-group">
+                <label>Numero de Cuenta</label>
+                <input type="number" class="form-control" id="nro_cuenta" required>
+              </div>
+              <div class="form-group">
+                <label>Alias</label>
+                <input type="text" class="form-control" id="alias" required>
+              </div>
+              <div class="form-group">
+                <label for="banco" class="form-label">Banco</label>
+                <select class="form-select" aria-label="Default select example" id="banco">
+                  <option value="">Seleccione Banco</option>
+                  <option value="1">Banco Estado</option>
+                  <option value="2">Banco de Chile</option>
+                  <option value="3">Banco Itau</option>
+                  <option value="4">Banco Santander</option>
+                  <option value="5">Mercado Pago</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-success btn-block">
+                Guardar contacto
+              </button>
+            </form>
+          </div>
 
-        localStorage.setItem('contactos', JSON.stringify(contactos));
+        </div>
+      </div>
+    </div>
 
-        renderContactos();
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+      document.getElementById('formContacto').addEventListener('submit', e => {
+        e.preventDefault();
 
-        $('#modalContacto').modal('hide');
-        e.target.reset();
-      }
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const nro_cuenta = document.getElementById('nro_cuenta').value;
+        const selectBanco = document.getElementById('banco');
+        const bancoTxt = selectBanco.options[selectBanco.selectedIndex].text;
+        if (selectBanco.value === "") {
+          alert("Debe seleccionar un banco");
+        } else {
+          contactos.push({
+            id: Date.now(),
+            nombre,
+            apellido,
+            nro_cuenta,
+            bancoTxt,
+          });
+
+          localStorage.setItem('contactos', JSON.stringify(contactos));
+
+          renderContactos();
+
+          $('#modalContacto').modal('hide');
+          e.target.reset();
+        }
 
 
 
-    });
-
-    let contactos = JSON.parse(localStorage.getItem('contactos')) || [];
-    let contactoSeleccionado = null;
-
-    function renderContactos() {
-      const lista = document.getElementById('contactList');
-      lista.innerHTML = '';
-
-      contactos.forEach(c => {
-        const li = document.createElement('li');
-        li.className = 'list-group-item list-group-item-action';
-        li.textContent = `${c.nombre} ${c.apellido} - ${c.nro_cuenta} ${c.bancoTxt}`;
-
-        li.onclick = () => {
-          contactoSeleccionado = c;
-          document.querySelectorAll('#contactList li')
-            .forEach(item => item.classList.remove('active'));
-          li.classList.add('active');
-        };
-
-        lista.appendChild(li);
       });
-    }
 
-    renderContactos();
+      let contactos = JSON.parse(localStorage.getItem('contactos')) || [];
+      let contactoSeleccionado = null;
 
+      function renderContactos() {
+        const lista = document.getElementById('contactList');
+        lista.innerHTML = '';
 
-    document.getElementById('btnEnviar').addEventListener('click', () => {
-      const monto = Number(document.getElementById('montoEnvio').value);
-      let saldo = Number(localStorage.getItem('saldo')) || 0;
+        contactos.forEach(c => {
+          const li = document.createElement('li');
+          li.className = 'list-group-item list-group-item-action';
+          li.textContent = `${c.nombre} ${c.apellido} - ${c.nro_cuenta} ${c.bancoTxt}`;
 
-      if (!contactoSeleccionado) {
-        alert('Seleccione un contacto');
-        return;
+          li.onclick = () => {
+            contactoSeleccionado = c;
+            document.querySelectorAll('#contactList li')
+              .forEach(item => item.classList.remove('active'));
+            li.classList.add('active');
+          };
+
+          lista.appendChild(li);
+        });
       }
 
-      if (monto <= 0) {
-        alert('Monto inválido');
-        return;
-      }
+      renderContactos();
 
-      if (monto > saldo) {
-        alert('Saldo insuficiente');
-        return;
-      }
 
-      localStorage.setItem('saldo', saldo - monto);
-      plata = localStorage.getItem('saldo')
-      alert(`Enviado $${monto.toLocaleString('es-CL')} a ${contactoSeleccionado.nombre} \n
+      document.getElementById('btnEnviar').addEventListener('click', () => {
+        const monto = Number(document.getElementById('montoEnvio').value);
+        let saldo = Number(localStorage.getItem('saldo')) || 0;
+
+        if (!contactoSeleccionado) {
+          alert('Seleccione un contacto');
+          return;
+        }
+
+        if (monto <= 0) {
+          alert('Monto inválido');
+          return;
+        }
+
+        if (monto > saldo) {
+          alert('Saldo insuficiente');
+          return;
+        }
+
+        localStorage.setItem('saldo', saldo - monto);
+        plata = localStorage.getItem('saldo')
+        alert(`Enviado $${monto.toLocaleString('es-CL')} a ${contactoSeleccionado.nombre} \n
       Su saldo actual es ${plata}
       
       `);
 
-      registrarMovimiento(
-        'envio',
-        contactoSeleccionado.nombre,
-        monto
-      );
+        registrarMovimiento(
+          'envio',
+          contactoSeleccionado.nombre,
+          monto
+        );
 
-      document.getElementById('montoEnvio').value = '';
-    });
-
-    function registrarMovimiento(tipo, contacto, monto) {
-      let movimientos = JSON.parse(localStorage.getItem('movimientos')) || [];
-
-      movimientos.unshift({
-        tipo,
-        contacto,
-        monto,
-        fecha: new Date().toLocaleString('es-CL')
+        document.getElementById('montoEnvio').value = '';
       });
 
-      localStorage.setItem('movimientos', JSON.stringify(movimientos));
-    }
+      function registrarMovimiento(tipo, contacto, monto) {
+        let movimientos = JSON.parse(localStorage.getItem('movimientos')) || [];
 
-    document.getElementById('logout').addEventListener('click', () => {
-      localStorage.removeItem('loggedIn');
-      window.location.href = 'index.html';
-    });
-  </script>
+        movimientos.unshift({
+          tipo,
+          contacto,
+          monto,
+          fecha: new Date().toLocaleString('es-CL')
+        });
+
+        localStorage.setItem('movimientos', JSON.stringify(movimientos));
+        location.reload();
+      }
+
+      document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('loggedIn');
+        window.location.href = 'index.html';
+      });
+      //mostrar saldo en pantalla
+      const montoElemento = document.getElementById('monto');
+
+      // Obtener saldo desde localStorage
+      let saldo = Number(localStorage.getItem('saldo'));
+
+      // Mostrarlo formateado
+      montoElemento.textContent =
+        '$' + saldo.toLocaleString('es-CL');
+    </script>
 
 </body>
 

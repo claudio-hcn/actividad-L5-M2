@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Wallet - Depositar</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -25,66 +26,94 @@
   <div class="container bg-secondary p-3">
     <h2 class="text-warning text-center">Depositar</h2>
     <form>
+      <div class="form-group bg-light p-1">
+            <label>Dinero en cuenta:</label>
+            <h3 id="monto" class="text-center"></h3>
+          </div>
       <div class="form-group text-center ">
-        <label for="depositAmount">Monto a depositar:</label>
-        <input type="number" class="form-control" id="depositAmount" placeholder="Enter amount">
+        <label for="depositAmount" class="text-light">Monto a depositar:</label>
+        <input type="number" class="form-control" id="depositAmount" placeholder="Ingrese el monto">
       </div>
-      <button type="submit" class="btn btn-primary">Realizar depósito</button>
+      <button type="submit" class="btn btn-primary btn-block">Realizar depósito</button>
     </form>
-    <a href="menu.html" class="btn btn-warning m-3">Volver al Menú Principal</a>
-    <button class="btn btn-danger btn-block" id="logout">
-  Cerrar sesión
-</button>
+    <div class="row mt-5">
+      <div class="col">
+<a href="menu.html" class="btn btn-primary btn-block text-white">Volver al Menú Principal</a>
+    </div>
+      <div class="col">
+
+<a class="btn btn-danger btn-block text-white" id="logout"> Cerrar sesión</a>
+
+      </div>
+    
+     
+     
+  </div>
+</div>
 
   </div>
 </body>
 <script>
   // Inicializar saldo si no existe
-if (!localStorage.getItem('saldo')) {
-  localStorage.setItem('saldo', 60000);
-}
-
-const inputDeposito = document.getElementById('depositAmount');
-document.querySelector('form').addEventListener('submit', function (e) {
-e.preventDefault();
-  let deposito = Number(inputDeposito.value);
-
-  if (deposito <= 0 || isNaN(deposito)) {
-    alert('Ingrese un monto válido');
-    return;
+  if (!localStorage.getItem('saldo')) {
+    localStorage.setItem('saldo', 60000);
   }
 
-  let saldoActual = Number(localStorage.getItem('saldo'));
+  const inputDeposito = document.getElementById('depositAmount');
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let deposito = Number(inputDeposito.value);
 
-  let nuevoSaldo = saldoActual + deposito;
-
-  // Guardar nuevo saldo
-  localStorage.setItem('saldo', nuevoSaldo);
-
-  alert('Depósito realizado con éxito');
-
-registrarMovimiento('deposito', null, deposito);
-
-  inputDeposito.value = '';
-});
-
-function registrarMovimiento(tipo, contacto, monto) {
-      let movimientos = JSON.parse(localStorage.getItem('movimientos')) || [];
-
-      movimientos.unshift({
-        tipo,
-        contacto,
-        monto,
-        fecha: new Date().toLocaleString('es-CL')
-      });
-
-      localStorage.setItem('movimientos', JSON.stringify(movimientos));
+    if (deposito <= 0 || isNaN(deposito)) {
+      alert('Ingrese un monto válido');
+      return;
     }
+
+    let saldoActual = Number(localStorage.getItem('saldo'));
+
+    let nuevoSaldo = saldoActual + deposito;
+
+    // Guardar nuevo saldo
+    localStorage.setItem('saldo', nuevoSaldo);
+
+    alert('Depósito realizado con éxito');
+
+    registrarMovimiento('deposito', null, deposito);
+
+    location.reload();
+
+    inputDeposito.value = '';
+  });
+
+  function registrarMovimiento(tipo, contacto, monto) {
+    let movimientos = JSON.parse(localStorage.getItem('movimientos')) || [];
+
+    movimientos.unshift({
+      tipo,
+      contacto,
+      monto,
+      fecha: new Date().toLocaleString('es-CL')
+    });
+
+    localStorage.setItem('movimientos', JSON.stringify(movimientos));
+  }
 
   document.getElementById('logout').addEventListener('click', () => {
     localStorage.removeItem('loggedIn');
     window.location.href = 'index.html';
   });
 
+
+  //mostrar saldo en pantalla
+  const montoElemento = document.getElementById('monto');
+
+  // Obtener saldo desde localStorage
+  let saldo = Number(localStorage.getItem('saldo'));
+
+  // Mostrarlo formateado
+  montoElemento.textContent =
+    '$' + saldo.toLocaleString('es-CL');
+
 </script>
+
 </html>

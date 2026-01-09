@@ -21,12 +21,12 @@
         <div class="bg-secondary p-3 rounded text-center">
           <h2 class="text-warning mb-3">Menú Principal</h2>
 
-          <div class="form-group">
+          <div class="form-group bg-light">
             <label>Dinero en cuenta:</label>
-            <h3 id="monto" class="bg-light"></h3>
+            <h3 id="monto" class=""></h3>
           </div>
 
-          <label class="mb-2 d-block">Elija una de las siguientes acciones</label>
+          <label class="mb-2 d-block text-light">Elija una de las siguientes acciones</label>
 
           <div class="d-flex flex-wrap justify-content-center">
             <a href="#" class="btn btn-primary m-1 col-11 col-md-5 col-lg-3" id="btn-depositar">
@@ -37,11 +37,11 @@
               Enviar Dinero
             </a>
 
-            <a href="#" class="btn btn-primary m-1 col-11 col-md-5 col-lg-4" id="btn-historial">
-              Últimos Movimientos
+            <a href="#" class="btn btn-primary m-1 col-11 col-md-5 col-lg-5" id="btn-historial">
+              Historial Transacciones
             </a>
           </div>
-          <button class="btn btn-danger btn-block mt-5" id="logout">
+          <button class="btn btn-danger col-4 mt-5 text-center" id="logout">
   Cerrar sesión
 </button>
         </div>
@@ -78,7 +78,7 @@
 
   // Botón depositar (verde)
   document.getElementById('btn-depositar').addEventListener('click', function () {
-    mostrarToast('Direccionando a pantalla depositar', '#28a745', 'deposit.html');
+    mostrarToast('Direccionando a pantalla depositar', '#696665', 'deposit.html');
   });
 
   // Botón girar (azul)
@@ -88,7 +88,7 @@
 
   // Botón historial (naranja/amarillo)
   document.getElementById('btn-historial').addEventListener('click', function () {
-    mostrarToast('Direccionando a pantalla historial', '#ffc107', 'transactions.html');
+    mostrarToast('Direccionando a pantalla historial', '#696665', 'transactions.html');
   });
 
   if (!localStorage.getItem('saldo')) {

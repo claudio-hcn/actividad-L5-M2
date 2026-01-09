@@ -27,49 +27,52 @@
     <h2 class="text-warning text-center">Últimos Movimientos</h2>
     <ul class="list-group" id="listaMovimientos">
     </ul>
-    <a href="menu.html" class="btn btn-warning m-3">Volver al Menú Principal</a>
-    <button class="btn btn-danger btn-block" id="logout">
-      Cerrar sesión
-    </button>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script>
-    const lista = document.getElementById('listaMovimientos');
+    <div class="row mt-5">
+      <div class="col">
+        <a href="menu.html" class="btn btn-primary btn-block text-white">Volver al Menú Principal</a>
+      </div>
+      <div class="col">
+        <a class="btn btn-danger btn-block text-white" id="logout"> Cerrar sesión</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+      const lista = document.getElementById('listaMovimientos');
 
-    let movimientos = JSON.parse(localStorage.getItem('movimientos')) || [];
+      let movimientos = JSON.parse(localStorage.getItem('movimientos')) || [];
 
-    if (movimientos.length === 0) {
-      lista.innerHTML = `
+      if (movimientos.length === 0) {
+        lista.innerHTML = `
     <li class="list-group-item text-center">
       No hay movimientos registrados
     </li>
   `;
-    } else {
-      movimientos
-        .slice(0, 5) // que muestre solo los ultimos 5
-        .forEach(m => {
-          const li = document.createElement('li');
-          li.className = 'list-group-item';
+      } else {
+        movimientos
+          .slice(0, 5) // que muestre solo los ultimos 5
+          .forEach(m => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
 
-          li.innerHTML = `
+            li.innerHTML = `
       <strong>${m.tipo === 'envio' ? 'Envío' : 'Depósito a cuenta propia'}</strong><br>
       ${m.contacto ? 'A: ' + m.contacto + '<br>' : ''}
       Monto: $${m.monto.toLocaleString('es-CL')}<br>
       <small class="text-muted">${m.fecha}</small>
     `;
 
-          lista.appendChild(li);
-        });
-    }
+            lista.appendChild(li);
+          });
+      }
 
-    document.getElementById('logout').addEventListener('click', () => {
-      localStorage.removeItem('loggedIn');
-      window.location.href = 'index.html';
-    });
+      document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('loggedIn');
+        window.location.href = 'index.html';
+      });
 
-  </script>
+    </script>
 </body>
 
 </html>
