@@ -11,6 +11,16 @@
 
 Prueba la aplicación aquí: **[https://claudio-hcn.github.io/actividad-L5-M2/](https://claudio-hcn.github.io/actividad-L5-M2/)**
 
+
+## 🔐 Credenciales de Acceso
+
+Para iniciar sesión en la aplicación, utiliza las siguientes credenciales:
+
+**Usuario:** `admin@email.com`  
+**Contraseña:** `admin123`
+
+> ⚠️ **Nota**: Estas son credenciales de demostración. En un entorno de producción real, nunca debes usar credenciales tan simples ni compartirlas públicamente.
+
 ## 📝 Descripción
 
 Este proyecto es una aplicación web bancaria completa que simula las operaciones básicas de un sistema bancario. Desarrollada como parte de un ejercicio educativo, permite a los usuarios realizar depósitos, transferencias y consultar el historial de transacciones mediante una interfaz intuitiva y responsiva.
@@ -67,15 +77,6 @@ actividad-L5-M2/
    ```bash
    git clone https://github.com/claudio-hcn/actividad-L5-M2.git
    ```
-## 🔐 Credenciales de Acceso
-
-Para iniciar sesión en la aplicación, utiliza las siguientes credenciales:
-
-**Usuario:** `admin@email.com`  
-**Contraseña:** `admin123`
-
-> ⚠️ **Nota**: Estas son credenciales de demostración. En un entorno de producción real, nunca debes usar credenciales tan simples ni compartirlas públicamente.
-
 
 2. **Navegar al directorio del proyecto**
    ```bash
